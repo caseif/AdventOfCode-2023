@@ -1,0 +1,10 @@
+[package]
+name = "day01"
+version = "0.0.1"
+
+[[bin]]
+name = "day01"
+path = "day01.rs"
+
+[dependencies]
+"regex" = "1.10"
