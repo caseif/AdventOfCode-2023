@@ -1,3 +1,4 @@
+use std::cmp::min;
 use std::collections::HashMap;
 use std::fs::File;
 use std::io;
@@ -18,7 +19,27 @@ fn read_input_file() -> Vec<String> {
             .collect();
 }
 
-fn solve() -> (u32, u128) {
+fn gcd(a: u64, b: u64) -> u64 {
+    if a == 0 {
+        return b;
+    } else if b == 0 {
+        return a;
+    } else if a % 2 == 0 && b % 2 == 0 {
+        return 2 * gcd(a / 2, b / 2);
+    } else if a % 2 == 0 {
+        return gcd(a / 2, b);
+    } else if b % 2 == 0 {
+        return gcd(a, b / 2);
+    } else {
+        return gcd(a.abs_diff(b), min(a, b));
+    }
+}
+
+fn lcm(a: u64, b: u64) -> u64 {
+    return a / gcd(a, b) * b;
+}
+
+fn solve() -> (u32, u64) {
     let lines = read_input_file();
 
     let steps = lines[0].chars().collect::<Vec<char>>();
@@ -61,9 +82,8 @@ fn solve() -> (u32, u128) {
             cur_step = (cur_step + 1) % steps.len();
         }
 
-        println!("{start_node}: {total_steps}");
+        ans_b = lcm(ans_b, total_steps as u64);
     }
-    println!("find the LCM yourself lol");
 
-    return (ans_a, 0);
+    return (ans_a, ans_b);
 }
