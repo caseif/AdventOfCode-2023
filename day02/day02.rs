@@ -3,9 +3,9 @@ use std::fs::File;
 use std::io;
 use std::io::BufRead;
 
-const k_red_count: u32 = 12;
-const k_green_count: u32 = 13;
-const k_blue_count: u32 = 14;
+const RED_COUNT: u32 = 12;
+const GREEN_COUNT: u32 = 13;
+const BLUE_COUNT: u32 = 14;
 
 fn main() {
     let (part_a, part_b) = solve();
@@ -56,7 +56,7 @@ fn solve() -> (u32, u32) {
                 };
             }
 
-            if red > k_red_count || green > k_green_count || blue > k_blue_count {
+            if red > RED_COUNT || green > GREEN_COUNT || blue > BLUE_COUNT {
                 impossible = true;
             }
 
